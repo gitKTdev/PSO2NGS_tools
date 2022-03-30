@@ -66,4 +66,5 @@ https://github.com/gitKTdev/PSO2NGS_tools/raw/main/VRGaugeManagementTool/dist/PS
 
 * 本ツールはメモリリークの疑いがあります
 * 使用しているライブラリ「tkinter」が参照している「Tk」というライブラリが原因のようです
+  * https://sourceforge.net/p/tktoolkit/bugs/2859/
 * 個人の手におえないので, 重くなったら都度再起動をしてください
