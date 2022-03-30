@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import tkinter
 import tkinter.ttk
 from tkinter import font
