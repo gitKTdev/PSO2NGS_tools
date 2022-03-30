@@ -61,3 +61,9 @@ https://github.com/gitKTdev/PSO2NGS_tools/raw/main/VRGaugeManagementTool/dist/PS
       * 「VRゲージ残量」の分母に値する
   * **「VRゲージ残量」**
     * 算出されたVRゲージの残量をリアルタイムに出力
+
+## 注意点
+
+* 本ツールはメモリリークの疑いがあります
+* 使用しているライブラリ「tkinter」が参照している「Tk」というライブラリが原因のようです
+* 個人の手におえないので, 重くなったら都度再起動をしてください
