@@ -20,7 +20,7 @@ https://github.com/gitKTdev/PSO2NGS_tools/raw/main/CapsuleDropAnalyzer/dist/PSO2
 
 ### 画面説明
 
-![img_1.png](img_1.png)
+![img_1.png](resources/img_1.png)
 
 * **ファイル選択**
   * 解析したいActionLogファイルを選択してください
