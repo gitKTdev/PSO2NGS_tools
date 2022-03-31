@@ -8,11 +8,14 @@
 
 ## ダウンロード方法
 
-以下URLからダウンロード
+以下URLから2つダウンロード
 
 ```
 https://github.com/gitKTdev/PSO2NGS_tools/raw/main/VRGaugeManagementTool/dist/PSO2NGS_VRGaugeManagementTool.exe
+https://github.com/gitKTdev/PSO2NGS_tools/raw/main/VRGaugeManagementTool/dist/WindowCaptureController.exe
 ```
+
+* ダウンロードしたexeファイルは必ず同じフォルダ内で管理すること
 
 ## 使用方法
 
@@ -20,12 +23,37 @@ https://github.com/gitKTdev/PSO2NGS_tools/raw/main/VRGaugeManagementTool/dist/PS
 
 ### 画面説明
 
+#### **PSO2NGS_VRGaugeManagementTool.exe**
+
+* VRゲージの残量を解析するツール
+
+![img.png](resources/img3.png)
+
+* **Refresh**
+  * ツールを再起動させるボタン
+  * 画面が重くなった際に押してください
+
+#### **PSO2NGS_VRGaugeManagementTool.exe**
+
+* PSO2NGS_VRGaugeManagementTool.exeに必要なコンフィグファイルを作成するツール 
+* 調整専用のツールであるため, ゲームプレイ中での長時間の使用は推奨しません 
+* ゲームプレイ中ではPSO2NGS_VRGaugeManagementTool.exeを使用してください
+
 ![img.png](resources/img.png)
 
 * **キャプチャ範囲調整**
+  * **save**
+    * キャプチャ範囲調整で調整した値をローカルに保存し, 次回実行時に同じ調整内容で出力するためのファイルを作成する
+    * ファイルはPSO2NGS_VRGaugeManagementTool.exeを配置しているフォルダに作成される
+    * ファイル名は"vrgmt_config.cfg"
+    * 2つのexeファイルはどちらも同じコンフィグファイルを参照する
+    * 専用フォルダを作成し, exeファイルのショートカットをデスクトップに置くといった使用方法を推奨する
+  * **exit**
+    * ツール終了ボタン
+    * 設定完了&save後に押してツールを終了させてください
   * **FPS**
     * キャプチャの時間間隔を変更可能 (デフォルト : 10fps)
-    * 「反映」を押すと適用される
+    * 「反映」を押すと適用される (save押下時も適用されるようになる)
   * **調整幅**
     * キャプチャ範囲を調整する際の調整幅
     * 値が小さいほど細かい調整ができる
@@ -42,10 +70,6 @@ https://github.com/gitKTdev/PSO2NGS_tools/raw/main/VRGaugeManagementTool/dist/PS
     * サンプルイメージ
       * ![img.png](resources/img2.png)
       * イメージ中の赤ラインが判定ライン
-  * **save**
-    * キャプチャ範囲調整で調整した値をローカルに保存し, 次回実行時に同じ調整内容で出力するためのファイルを作成する
-    * ファイルはPSO2NGS_VRGaugeManagementTool.exeを配置しているフォルダに作成される
-    * exeファイルと共に専用フォルダを作成し, exeファイルのショートカットをデスクトップに置くといった使用方法を推奨する
 
 * **キャプチャ画面**
   * **「キャプチャ画面」**
@@ -65,6 +89,4 @@ https://github.com/gitKTdev/PSO2NGS_tools/raw/main/VRGaugeManagementTool/dist/PS
 ## 注意点
 
 * 本ツールはメモリリークの疑いがあります
-* 使用しているライブラリ「tkinter」が参照している「Tk」というライブラリが原因のようです
-  * https://sourceforge.net/p/tktoolkit/bugs/2859/
-* 個人の手におえないので, 重くなったら都度再起動をしてください
+* ライブラリ起因の問題であり, 個人の手におえないため, 重くなったら都度再起動をしてください
