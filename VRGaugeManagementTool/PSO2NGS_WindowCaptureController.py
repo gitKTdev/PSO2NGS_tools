@@ -245,10 +245,10 @@ def control_space_window():
     row_idx += 1
 
     # save, exitボタン
-    exit_button = tkinter.ttk.Button(frame_0_0, text="exit", width=4, command=exit_progrram, style="MyWidget.TButton")
-    exit_button.grid(row=row_idx, column=1, sticky="e")
     save_button = tkinter.ttk.Button(frame_0_0, text="save", width=4, command=save_config, style="MyWidget.TButton", default="active")
-    save_button.grid(row=row_idx, column=0, sticky="e")
+    save_button.grid(row=row_idx, column=0, columnspan=2, sticky="e")
+    exit_button = tkinter.ttk.Button(frame_0_0, text="exit", width=4, command=exit_progrram, style="MyWidget.TButton")
+    exit_button.grid(row=row_idx, column=2, columnspan=2, sticky="w")
     row_idx += 1
 
     # fps
