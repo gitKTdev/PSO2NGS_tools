@@ -109,7 +109,15 @@ def parse_logfile():
         # 各カテゴリ抽出
         pickup_item_list = list(set([i["itemname"] for i in pickup_log_data if i["itemname"] != ""]))
         pickup_capsule_list = sorted([i for i in pickup_item_list if i[0] == "C"])
-        pickup_capsule_num_list = [len([j for j in pickup_log_data if j["itemname"] == i]) for i in pickup_capsule_list]
+        pickup_capsule_num_list = [
+            sum(
+                [
+                    int(re.match(r"Num\(([0-9]+)\)", j["additionalinfo"]).groups()[0])
+                    if re.match(r"Num\(([0-9]+)\)", j["additionalinfo"]) is not None else 0
+                    for j in pickup_log_data if j["itemname"] == i
+                ]
+            ) for i in pickup_capsule_list
+        ]
 
         pickup_capsule_result = dict(zip(pickup_capsule_list, pickup_capsule_num_list))
 
