@@ -147,6 +147,7 @@ def plot_judge_line(masked_image, color):
 
 def calc_vr_percent(image_vr, image_vr_max):
     global mask_top, mask_bottom, target_idx
+    vr_max_padding = 2
 
     target_idx = round((mask_top + mask_bottom) / 2)
     row_span = [target_idx - 1, target_idx, target_idx + 1]
@@ -159,10 +160,10 @@ def calc_vr_percent(image_vr, image_vr_max):
             [max(np.diff([j for j in range(len(image_vr_max[i])) if image_vr_max[i][j] > 0])) for i in row_span]
         )
 
-        if vr_max <= 3:
+        if vr_max <= vr_max_padding:
             return "-"
 
-        vr_per = abs(max([min([round(vr_now / (vr_max - 3) * 100, 2), 100]), 0]))
+        vr_per = abs(max([min([round(vr_now / (vr_max - vr_max_padding) * 100, 2), 100]), 0]))
 
     except Exception:
         vr_per = "-"
