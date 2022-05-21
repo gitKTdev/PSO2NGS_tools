@@ -32,6 +32,10 @@ https://github.com/gitKTdev/PSO2NGS_tools/raw/main/VRGaugeManagementTool/dist/Wi
 * **Refresh**
   * ツールを再起動させるボタン
   * 画面が重くなった際に押してください
+* VRゲージ残量
+  * 現在のVRゲージの残量割合 [%]
+* 減少予測
+  * 次の減少後の残量割合予測値 [%]
 
 #### **PSO2NGS_VRGaugeManagementTool.exe**
 

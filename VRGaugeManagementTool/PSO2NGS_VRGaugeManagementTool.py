@@ -12,12 +12,13 @@ import numpy as np
 import json
 import cv2
 import statistics
+import copy
 
 # from memory_profiler import profile
 
 global img_width, img_height, width, height
 global xtrim_start, xtrim_span, ytrim_start, ytrim_span, span, mask_right, mask_left, mask_top, mask_bottom, fps
-global target_idx
+global target_idx, vr_log
 global windc
 
 
@@ -121,7 +122,8 @@ def mask_image(image, mask_color):
 
 
 def calc_vr_percent(image_vr, image_vr_max):
-    global mask_top, mask_bottom, target_idx
+    global mask_top, mask_bottom, target_idx, vr_log
+    vr_max_padding = 2
 
     target_idx = round((mask_top + mask_bottom) / 2)
     row_span = [target_idx - 1, target_idx, target_idx + 1]
@@ -134,14 +136,28 @@ def calc_vr_percent(image_vr, image_vr_max):
             [max(np.diff([j for j in range(len(image_vr_max[i])) if image_vr_max[i][j] > 0])) for i in row_span]
         )
 
-        if vr_max <= 3:
-            return "-"
+        if vr_max <= vr_max_padding:
+            return "-", "-"
 
-        vr_per = abs(max([min([round(vr_now / (vr_max - 3) * 100, 2), 100]), 0]))
+        vr_per = abs(max([min([round(vr_now / (vr_max - vr_max_padding) * 100, 2), 100]), 0]))
+        print(vr_per, vr_log)
+
+        if vr_log[0] is None:
+            vr_log[0] = copy.deepcopy(vr_now)
+            vr_per_pre = "-"
+        else:
+            if vr_log[0] != vr_now:
+                vr_log[1] = copy.deepcopy(vr_now)
+                vr_log.reverse()
+            if vr_log[1] is not None:
+                vr_per_pre = abs(max([min([round((vr_now - vr_log[1] + vr_log[0]) / (vr_max - vr_max_padding) * 100, 2), 100]), 0]))
+            else:
+                vr_per_pre = "-"
 
     except Exception:
         vr_per = "-"
-    return vr_per
+        vr_per_pre = "-"
+    return vr_per, vr_per_pre
 
 
 # @profile(precision=4)
@@ -179,11 +195,11 @@ def realtime_calc_vr():
         mask_image(img_vr, mask_color)
         mask_image(img_vr_max, mask_color)
         # VR計算
-        vr_percent = calc_vr_percent(img_vr, img_vr_max)
+        vr_percent, vr_percent_pre = calc_vr_percent(img_vr, img_vr_max)
 
         del img_monitor, img_vr, img_vr_max, img_vr_maxc
 
-        label_text.set(f"VRゲージ残量: {vr_percent}%")
+        label_text.set(f"VRゲージ残量: {vr_percent}%\n  (減少予測 >> {vr_percent_pre}%)")
 
         main.after(round(fps2ms(fps)), realtime_calc_vr)
 
@@ -198,6 +214,7 @@ def refresh():
 
 # 初期値定義
 load_file = "./vrgmt_config.cfg"
+vr_log = [None, None]
 config_json = {}
 try:
     with open(load_file, "r") as f:
@@ -208,7 +225,7 @@ except Exception:
 # ウィンドウ作成
 main = tkinter.Tk()
 main.title("VRゲージ管理ツール")
-main.geometry(f"270x60")
+main.geometry(f"270x90")
 main.attributes("-topmost", True)
 
 # フレーム定義
