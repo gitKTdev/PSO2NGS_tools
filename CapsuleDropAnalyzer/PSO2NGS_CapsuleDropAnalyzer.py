@@ -20,7 +20,14 @@ stop_realtime_parse_flag = False
 job = None
 capsule_name_regexp = ""
 
-special_items = ["ストラグメント", "リファイナー", "Bトリガー"]
+special_items = [
+    "ストラグメント",
+    "リファイナー",
+    "Bトリガー",
+    "ブリザーディアム",
+    "アイシクルオーブ",
+    "アイシクルキューブ"
+]
 
 
 class UnknownFile(Exception):
